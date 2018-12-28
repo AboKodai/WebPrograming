@@ -2,20 +2,67 @@
 <html>
 <head>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="bootstrap">
+<link rel="stylesheet" href="bootstrap.css">
 <meta charset="UTF-8">
-<title>ユーザー一覧</title>
+<title>ユーザ一覧</title>
 </head>
 <body>
-	<div class="yellow" >
-		<pre class="right">ユーザー名 さん 　　　　<a>ログアウト</a>
-		</pre>
-	</div>
-	<h1 class="center">ユーザー一覧</h1>
-	<p class="right"><a>新規登録</a></p>
-	<p>ログインID <input type="text" name="ID"></p>
-	<p>ユーザ名 <input type="text" name="ID"></p>
+	<div class="container">
+		<div class="yellow right header-height">
+			<pre>
+				<span>ユーザ名　さん</span>　　　　<span><a>ログアウト</a></span>
+			</pre>
+		</div>
+		<h1 class="center top">ユーザ一覧</h1>
+		<p class="right">
+			<a>新規登録</a>
+		</p>
+		<div>
+			<pre class="content-margin center">
+	ログインID：	<input type="text" name="ID" style="width: 250px"><br>
+	ユーザ名： 	<input type="text" name="name" style="width: 250px"><br>
+	生年月日：	<input type="date" name="birthday-min" style="width: 105px">　～　<input
+					type="date" name="birthday-max" style="width: 105px">
+	</pre>
+			<p class="right">
+				<input type="submit" value="検索" style="width: 100px">
+			</p>
+		</div>
+		<hr size="5" color="black">
+		<table border="1" class="auto-mgn">
 
+			<tr>
+				<th width="150px">ログインID</th>
+				<th width="150px">ユーザ名</th>
+				<th width="150px">生年月日</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>id0001</td>
+				<td>田中太郎</td>
+				<td>1989年04月26日</td>
+				<td><button type="submit" class="dt-btn btn-mgn">詳細</button>
+					<button type="submit" class="ud-btn btn-mgn">更新</button>
+					<button type="submit" class="dl-btn btn-mgn">削除</button></td>
+			</tr>
+			<tr>
+				<td>id0002</td>
+				<td>佐藤二郎</td>
+				<td>2001年11月12日</td>
+				<td><button type="submit" class="dt-btn btn-mgn">詳細</button>
+					<button type="submit" class="ud-btn btn-mgn">更新</button>
+					<button type="submit" class="dl-btn btn-mgn">削除</button></td>
+			</tr>
+			<tr>
+				<td>id0003</td>
+				<td>佐川真司</td>
+				<td>2000年01月01日</td>
+				<td><button type="submit" class="dt-btn btn-mgn">詳細</button>
+					<button type="submit" class="ud-btn btn-mgn">更新</button>
+					<button type="submit" class="dl-btn btn-mgn">削除</button></td>
+			</tr>
+		</table>
+	</div>
 
 </body>
 </html>
