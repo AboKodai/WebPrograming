@@ -1,0 +1,55 @@
+@charset "UTF-8";
+.center{
+	text-align:center;
+}
+.justify{
+	text-align:justify
+}
+.right{
+	text-align:right;
+}
+.black{
+	background-color:black;
+}
+.yellow{
+	background-color:yellow;
+}
+.top{
+	margin-top:80px;
+	margin-bottom:80px;
+}
+.content-margin{
+	margin-bottom:30px
+}
+
+.header-height{
+	height:20px;
+}
+.space{
+	margin-right:50px;
+}
+table{
+	text-align:center;
+}
+th{
+	background:#E6E6E6;
+}
+.dt-btn{
+	background-color:blue;
+	color:white;
+}
+.ud-btn{
+	background-color:green;
+	color:white;
+}
+.dl-btn{
+	background-color:red;
+	color:white;
+}
+.btn-mgn{
+	margin-right:10px;
+	margin-left:10px;
+}
+.auto-mgn{
+	margin:auto;
+}
