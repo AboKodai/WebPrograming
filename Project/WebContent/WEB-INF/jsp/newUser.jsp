@@ -1,15 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="bootstrap.css">
+<head>
 <meta charset="UTF-8">
 <title>新規登録</title>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 		<div class="yellow right header-height">
 			<pre>
 				<span>ユーザ名　さん</span>　　　　<span><a>ログアウト</a></span>
@@ -57,6 +55,5 @@
 
 		<a>戻る</a>
 	</div>
-
 </body>
 </html>

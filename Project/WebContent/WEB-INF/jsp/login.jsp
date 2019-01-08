@@ -1,19 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<link rel="stylesheet" href="bootstrap.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <meta charset="UTF-8">
 <title>ログイン画面</title>
+
 </head>
 <body>
-<div class="container center">
+<!-- body -->
+
+	<div class="container center">
+
+	<c:if test="${errMsg != null }">
+	<div >
+	${errMsg}
+	</div>
+	</c:if>
+
 		<h1 class="top">ログイン画面</h1>
-		<form>
+		<form method="post" action="LoginServlet">
 			<div class="center content-margin">
-				<span>ログインID：</span> <input type="text" name="ID">
+				<span>ログインID：</span> <input type="text" name="loginId">
 			</div>
 			<div class="center content-margin">
 				<span>パスワード：</span> <input type="password" name="password">
@@ -21,6 +32,5 @@
 			<input type="submit" value="ログイン">
 		</form>
 	</div>
-
 </body>
 </html>
