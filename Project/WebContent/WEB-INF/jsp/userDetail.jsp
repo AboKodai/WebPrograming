@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<link rel="stylesheet" href="bootstrap.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <meta charset="UTF-8">
 <title>ユーザ詳細</title>
 </head>
@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="yellow right header-height">
 			<pre>
-				<span>ユーザ名　さん</span>　　　　<span><a>ログアウト</a></span>
+				<span>${userInfo.name}　さん</span>　　　　<span><a>ログアウト</a></span>
 			</pre>
 		</div>
 
@@ -21,10 +21,10 @@
 		<div class="row">
 			<div class="col-sm-2 "></div>
 			<div class="col-sm-5 content-margin">ログインID</div>
-			<div class="col-sm-5 ">id0001</div>
+			<div class="col-sm-5 ">${userDetail.loginId}</div>
 			<div class="col-sm-2 "></div>
 			<div class="col-sm-5 content-margin">ユーザ名</div>
-			<div class="col-sm-5 ">田中太郎</div>
+			<div class="col-sm-5 ">${userDetail.name}</div>
 			<div class="col-sm-2 "></div>
 			<div class="col-sm-5 content-margin">生年月日</div>
 			<div class="col-sm-5 ">1989年04月26日</div>

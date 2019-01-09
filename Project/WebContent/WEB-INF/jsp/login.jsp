@@ -24,10 +24,10 @@
 		<h1 class="top">ログイン画面</h1>
 		<form method="post" action="LoginServlet">
 			<div class="center content-margin">
-				<span>ログインID：</span> <input type="text" name="loginId">
+				<span>ログインID：</span> <input type="text" name="loginId" required>
 			</div>
 			<div class="center content-margin">
-				<span>パスワード：</span> <input type="password" name="password">
+				<span>パスワード：</span> <input type="password" name="password" required>
 			</div>
 			<input type="submit" value="ログイン">
 		</form>

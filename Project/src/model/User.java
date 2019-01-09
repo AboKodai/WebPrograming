@@ -11,19 +11,28 @@ public class User {
 	private String createDate;
 	private String updateDate;
 
-	//data save
+	//ログイン中のユーザ情報
 	public User(String loginId, String name) {
 		this.loginId = loginId;
 		this.name = name;
 	}
 
-	//data set
+	//ユーザの全情報
 	public User(int id, String loginId, String name, Date birthday, String password, String createDate, String updateDate) {
 		this.id = id;
 		this.loginId = loginId;
 		this.name = name;
 		this.birthday = birthday;
 		this.password = password;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+	}
+
+	//ユーザの詳細情報
+	public User(String loginId, String name, Date birthday, String createDate, String updateDate) {
+		this.loginId = loginId;
+		this.name = name;
+		this.birthday = birthday;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}

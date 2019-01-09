@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="yellow right header-height">
 			<pre>
-				<span>ユーザ名　さん</span>　　　　<span><a>ログアウト</a></span>
+				<span>${userInfo.name}　さん</span>　　　　<span><a>ログアウト</a></span>
 			</pre>
 		</div>
 		<h1 class="center top">ユーザ削除確認</h1>

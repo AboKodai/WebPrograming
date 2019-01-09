@@ -1,49 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="bootstrap.css">
+<html lang="ja">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 <head>
 <meta charset="UTF-8">
 <title>新規登録</title>
 </head>
 <body>
-	<div class="container">
+
 		<div class="yellow right header-height">
 			<pre>
-				<span>ユーザ名　さん</span>　　　　<span><a>ログアウト</a></span>
+				<span>${userInfo.name}　さん</span>　　　　<span><a href="LogoutServlet">ログアウト</a></span>
 			</pre>
 		</div>
+		<div class="container">
+		<c:if test="${errMsg != null }">
+	<div class="center">
+	${errMsg}
+	</div>
+	</c:if>
 		<h1 class="center top">ユーザー新規登録</h1>
-		<form>
+		<form method="post" action="NewUserServlet">
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">ログインID</div>
 				<div class="col-sm-3 content-margin">
-					<input type="text" name="ID">
+					<input type="text" name="loginId" value="${loginId}" required>
 				</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">パスワード</div>
 				<div class="col-sm-3 content-margin">
-					<input type="password" name="password">
+					<input type="password" name="password" required>
 				</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">パスワード確認</div>
 				<div class="col-sm-3 content-margin">
-					<input type="password" name="password-con">
+					<input type="password" name="passwordCon" required>
 				</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">ユーザー名</div>
 				<div class="col-sm-3 content-margin">
-					<input type="text" name="name">
+					<input type="text" name="name" value="${name}" required>
 				</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">生年月日</div>
 				<div class="col-sm-3 content-margin">
-					<input type="date" name="birthday" style="width: 178px">
+					<input type="date" name="birthDate" style="width: 178px" value="${birthDate}" required>
 				</div>
 			</div>
 			<p class="center">
