@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 		//ユーザがつからない場合
 		if(user == null) {
 			//リクエストスコープにエラーメッセージをセット
-			request.setAttribute("errMsg", "ログインに失敗しました");
+			request.setAttribute("errMsg", "ログインIDまたはパスワードが異なります");
 
 			//login.jspにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");

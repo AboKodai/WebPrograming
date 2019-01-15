@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -11,17 +12,18 @@
 </head>
 <body>
 
-		<div class="yellow right header-height">
-			<pre>
-				<span>${userInfo.name}　さん</span>　　　　<span><a href="LogoutServlet">ログアウト</a></span>
+	<div class="yellow right header-height">
+		<pre>
+				<span>${userInfo.name}　さん</span>　　　　<span><a
+				href="LogoutServlet">ログアウト</a></span>
 			</pre>
-		</div>
-		<div class="container">
-		<c:if test="${errMsg != null }">
-	<div class="center">
-	${errMsg}
 	</div>
-	</c:if>
+	<div class="container">
+		<c:if test="${errMsg != null }">
+			<div class="center">
+				<font color="red">${errMsg}</font>
+			</div>
+		</c:if>
 		<h1 class="center top">ユーザー新規登録</h1>
 		<form method="post" action="NewUserServlet">
 			<div class="row">
@@ -52,7 +54,7 @@
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">生年月日</div>
 				<div class="col-sm-3 content-margin">
-					<input type="date" name="birthDate" style="width: 178px" value="${birthDate}" required>
+					<input type="date" name="birthDate" style="width: 178px"value="${birthDate}" required>
 				</div>
 			</div>
 			<p class="center">
@@ -62,7 +64,7 @@
 		</form>
 
 
-		<a>戻る</a>
+		<a href="UserListServlet">戻る</a>
 	</div>
 </body>
 </html>

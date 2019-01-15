@@ -16,7 +16,7 @@
 
 		<div class="yellow right header-height">
 			<pre>
-				<span>${userInfo.name}さん</span>　　　　<span><a href="LogoutServlet">ログアウト</a></span>
+				<span>${userInfo.name}　さん</span>　　　　<span><a href="LogoutServlet">ログアウト</a></span>
 			</pre>
 		</div>
 		<!-- /header -->
@@ -56,10 +56,10 @@
 			<tr>
 			<td>${user.loginId }</td>
 			<td>${user.name }</td>
-			<td>${user.birthday }</td>
+			<td>${user.birthDate }</td>
 			<td><a href="UserDetailServlet?id=${user.id}"><button type="submit" class="dt-btn btn-mgn" >詳細</button></a>
-					<a href="UserUpdateServlet"><button type="submit" class="ud-btn btn-mgn">更新</button></a>
-					<a href="UserDeleteServlet"><button type="submit" class="dl-btn btn-mgn">削除</button></a></td>
+					<a href="UserUpdateServlet?id=${user.id}"><button type="submit" class="ud-btn btn-mgn">更新</button></a>
+					<a href="UserDeleteServlet?id=${user.id}"><button type="submit" class="dl-btn btn-mgn">削除</button></a></td>
 					</tr>
 			</c:forEach>
 

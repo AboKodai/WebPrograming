@@ -65,8 +65,7 @@ public class UserDao {
 			conn = DBManager.getConnection();
 
 			//SELECT文を準備
-			//TODO:　未実装：　管理者以外を取得するようSQLを変更する
-			String sql = "SELECT* FROM USER";
+			String sql = "SELECT* FROM user WHERE id != 1";
 
 			//SELECT分を実行し結果を取得
 			Statement stmt = conn.createStatement();
@@ -77,11 +76,11 @@ public class UserDao {
 				int id = rs.getInt("id");
 				String loginId = rs.getString("login_id");
 				String name = rs.getString("name");
-				Date birthday = rs.getDate("birth_date");
+				Date birthDate = rs.getDate("birth_date");
 				String password = rs.getString("password");
 				String createDate = rs.getString("create_date");
 				String updateDate = rs.getString("update_date");
-				User user = new User(id, loginId, name, birthday, password, createDate, updateDate);
+				User user = new User(id, loginId, name, birthDate, password, createDate, updateDate);
 
 				userList.add(user);
 			}
@@ -157,6 +156,8 @@ public class UserDao {
 		Connection conn = null;
 		try {
 
+			int intId = Integer.parseInt(id);
+
 			//データベースに接続
 			conn = DBManager.getConnection();
 
@@ -165,7 +166,7 @@ public class UserDao {
 
 			//SELECT文を実行して結果を取得
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, id);
+			pStmt.setInt(1, intId);
 			ResultSet rs = pStmt.executeQuery();
 
 			//IDが一致するユーザがいない場合nullを返す
@@ -174,12 +175,14 @@ public class UserDao {
 			}
 
 			//取得した情報をユーザインスタンスに設定して返す
-			String loginId = rs.getString("loginId");
+			int ID = rs.getInt("id");
+			String loginId = rs.getString("login_id");
 			String name = rs.getString("name");
-			Date birthDate = rs.getDate("birthDate");
-			String createDate = rs.getString("createDate");
-			String updaateDate = rs.getString("updateDate");
-			return new User(loginId, name, birthDate, createDate, updaateDate);
+			Date birthDate = rs.getDate("birth_date");
+			String createDate = rs.getString("create_date");
+			String updateDate = rs.getString("update_date");
+			return new User(ID, loginId, name, birthDate, createDate, updateDate);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -195,4 +198,145 @@ public class UserDao {
 			}
 		}
 	}
+
+	//ユーザの削除
+	public boolean userDelete(String id) {
+		Connection conn = null;
+
+		try {
+			//データベースに接続
+			conn = DBManager.getConnection();
+
+			//DELETE文を用意
+			String sql = "DELETE FROM user WHERE id = ?";
+
+			//DELETE文を実行
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, id);
+
+			//結果を取得
+			int result = pStmt.executeUpdate();
+
+			//削除に成功した場合
+			if (result == 1) {
+				return true;
+			}
+
+			//削除に失敗した場合
+			else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+
+			//データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return false;
+				}
+			}
+		}
+	}
+
+	//パスワード含めたユーザの更新
+	public boolean update(String name, String birthDate, String password, String id) {
+		Connection conn = null;
+
+		try {
+			//データベースに接続
+			conn = DBManager.getConnection();
+
+			//UPDATE文を用意
+			String sql = "UPDATE user SET name=?,birth_date=?, password=?, update_date=now()  WHERE id = ?";
+
+			//DELETE文を実行
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, name);
+			pStmt.setString(2, birthDate);
+			pStmt.setString(3, password);
+			pStmt.setString(4, id);
+
+			//結果を取得
+			int result = pStmt.executeUpdate();
+
+			//更新に成功した場合
+			if (result == 1) {
+				return true;
+			}
+
+			//更新に失敗した場合
+			else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			//データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return false;
+				}
+			}
+
+		}
+	}
+
+	//パスワードを含まないユーザ情報の更新
+	//パスワード含めたユーザの更新
+		public boolean updateNoPas(String name, String birthDate, String id) {
+			Connection conn = null;
+
+			try {
+				//データベースに接続
+				conn = DBManager.getConnection();
+
+				//UPDATE文を用意
+				String sql = "UPDATE user SET name=?,birth_date=?, update_date=now()  WHERE id = ?";
+
+				//DELETE文を実行
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				pStmt.setString(1, name);
+				pStmt.setString(2, birthDate);
+				pStmt.setString(3, id);
+
+				//結果を取得
+				int result = pStmt.executeUpdate();
+
+				//更新に成功した場合
+				if (result == 1) {
+					return true;
+				}
+
+				//更新に失敗した場合
+				else {
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				//データベース切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						return false;
+					}
+				}
+
+			}
+		}
+
+		//idをもとにログインIDを取得
+
 }

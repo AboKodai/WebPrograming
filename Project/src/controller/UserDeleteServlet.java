@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.UserDao;
+import model.User;
+
 /**
  * Servlet implementation class userDelete
  */
@@ -30,21 +33,31 @@ public class UserDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//ログインセッションがある場合
+		//ログインセッションがない場合
 		HttpSession session = request.getSession();
-		if (session.getAttribute("userInfo") != null) {
+		if (session.getAttribute("userInfo") == null) {
 
-			//ユーザ一覧にリダイレクト
-			response.sendRedirect("UserListServlet");
+			//ログイン画面にリダイレクト
+			response.sendRedirect("LoginServlet");
 			return;
+
 		}
 
-		//フォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDelete.jsp");
-		dispatcher.forward(request, response);
-	}
+		//URLからGETパラメータとしてIDを受け取る
+				String id = request.getParameter("id");
 
+				//確認用：idをコンソールに出力
+				System.out.println(id);
 
+				//idを引数にしてidに紐づくユーザ情報を取得
+				UserDao userDao = new UserDao();
+				User user = userDao.findDetail(id);
+
+				//ユーザ情報をリクエストスコープにセットしてjspにフォワード
+				request.setAttribute("userDetail", user);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDelete.jsp");
+				dispatcher.forward(request, response);
+			}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,9 +69,10 @@ public class UserDeleteServlet extends HttpServlet {
 		//リクエストパラメータを取得
 		String yes = request.getParameter("yes");
 		String no = request.getParameter("no");
+		String id = request.getParameter("id");
 
 		//キャンセルが押された場合
-		if(no != null) {
+		if (no != null) {
 
 			//ユーザ一覧にリダイレクト
 			response.sendRedirect("UserListServlet");
@@ -66,6 +80,16 @@ public class UserDeleteServlet extends HttpServlet {
 		}
 
 		//OKが押された場合
+		if(yes != null) {
+
+			//ユーザを削除
+			UserDao userDao = new UserDao();
+			userDao.userDelete(id);
+		}
+
+		//ユーザ一覧にリダイレクト
+		response.sendRedirect("UserListServlet");
+
 
 	}
 

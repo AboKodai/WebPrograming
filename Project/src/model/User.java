@@ -6,7 +6,7 @@ public class User {
 	private int id;
 	private String loginId;
 	private String name;
-	private Date birthday;
+	private Date birthDate;
 	private String password;
 	private String createDate;
 	private String updateDate;
@@ -18,21 +18,22 @@ public class User {
 	}
 
 	//ユーザの全情報
-	public User(int id, String loginId, String name, Date birthday, String password, String createDate, String updateDate) {
+	public User(int id, String loginId, String name, Date birthDate, String password, String createDate, String updateDate) {
 		this.id = id;
 		this.loginId = loginId;
 		this.name = name;
-		this.birthday = birthday;
+		this.birthDate = birthDate;
 		this.password = password;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
 
 	//ユーザの詳細情報
-	public User(String loginId, String name, Date birthday, String createDate, String updateDate) {
+	public User(int id,String loginId, String name, Date birthDate, String createDate, String updateDate) {
+		this.id = id;
 		this.loginId = loginId;
 		this.name = name;
-		this.birthday = birthday;
+		this.birthDate = birthDate;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
@@ -59,11 +60,11 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getBirthday() {
-		return birthday;
+	public Date getbirthDate() {
+		return birthDate;
 	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setbirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 	public String getPassword() {
 		return password;

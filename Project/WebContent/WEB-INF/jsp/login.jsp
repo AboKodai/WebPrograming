@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -11,15 +12,15 @@
 
 </head>
 <body>
-<!-- body -->
+	<!-- body -->
 
 	<div class="container center">
 
-	<c:if test="${errMsg != null }">
-	<div >
-	${errMsg}
-	</div>
-	</c:if>
+		<c:if test="${errMsg != null }">
+			<div>
+				<font color="red">${errMsg}</font>
+			</div>
+		</c:if>
 
 		<h1 class="top">ログイン画面</h1>
 		<form method="post" action="LoginServlet">
