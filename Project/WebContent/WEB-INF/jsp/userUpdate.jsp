@@ -18,15 +18,15 @@
 			</pre>
 	</div>
 	<div class="container">
+		<h1 class="center top">ユーザ情報更新</h1>
 		<c:if test="${errMsg != null }">
 			<div class="center">
 				<font color="red">${errMsg}</font>
 			</div>
 		</c:if>
-		<h1 class="center top">ユーザ情報更新</h1>
 
 		<form method="post" action="UserUpdateServlet">
-			<div class="row">
+			<div class="row top">
 				<div class="col-sm-2 "></div>
 				<div class="col-sm-5 content-margin">ログインID</div>
 				<div class="col-sm-5 ">${userDetail.loginId}${user.loginId}</div>

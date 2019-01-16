@@ -18,7 +18,7 @@
 	</div>
 	<div class="container">
 		<h1 class="center top">ユーザ情報詳細参照</h1>
-		<div class="row">
+		<div class="row top">
 			<div class="col-sm-2 "></div>
 			<div class="col-sm-5 content-margin">ログインID</div>
 			<div class="col-sm-5 ">${userDetail.loginId}</div>

@@ -19,14 +19,14 @@
 			</pre>
 	</div>
 	<div class="container">
+		<h1 class="center top">ユーザー新規登録</h1>
 		<c:if test="${errMsg != null }">
 			<div class="center">
 				<font color="red">${errMsg}</font>
 			</div>
 		</c:if>
-		<h1 class="center top">ユーザー新規登録</h1>
 		<form method="post" action="NewUserServlet">
-			<div class="row">
+			<div class="row top">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">ログインID</div>
 				<div class="col-sm-3 content-margin">
@@ -54,7 +54,8 @@
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">生年月日</div>
 				<div class="col-sm-3 content-margin">
-					<input type="date" name="birthDate" style="width: 178px"value="${birthDate}" required>
+					<input type="date" name="birthDate" style="width: 178px"
+						value="${birthDate}" required>
 				</div>
 			</div>
 			<p class="center">

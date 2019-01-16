@@ -1,6 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.DatatypeConverter;
 
 import dao.UserDao;
 
@@ -76,6 +81,19 @@ public class NewUserServlet extends HttpServlet {
 			return;
 		}
 
+		//ハッシュを生成したい元の文字列
+		String source = password;
+		//ハッシュ生成前にバイト配列に置き換える際のCharset
+		Charset charset = StandardCharsets.UTF_8;
+		//ハッシュアルゴリズム
+		String algorithm = "MD5";
+
+		//ハッシュ生成処理
+		try {
+		byte[] bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
+		String result = DatatypeConverter.printHexBinary(bytes);
+
+
 		//現在時刻を取得
 		Date d = new Date();
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -84,10 +102,10 @@ public class NewUserServlet extends HttpServlet {
 
 		//入力項目を引数に渡して新規登録
 		UserDao userDao = new UserDao();
-		boolean result = userDao.newUser(loginId, name, birthDate, password, createDate, updateDate);
+		boolean resultSet = userDao.newUser(loginId, name, birthDate, result, createDate, updateDate);
 
 		//新規登録に失敗した場合
-		if(result == false ) {
+		if(resultSet == false ) {
 
 			//リクエストスコープにエラーメッセージをセット
 			request.setAttribute("errMsg", "入力された内容は正しくありません。");
@@ -105,8 +123,14 @@ public class NewUserServlet extends HttpServlet {
 
 		//成功したらユーザ一覧にリダイレクト
 		response.sendRedirect("UserListServlet");
+		}
+		catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return;
+		}
 
 
 	}
+
 
 }

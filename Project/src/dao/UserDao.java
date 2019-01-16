@@ -13,7 +13,7 @@ import model.User;
 
 public class UserDao {
 
-	//ログインIDとパスワードをもとにIDとname情報を返す
+	//ログインIDとパスワードをもとにログインIDとname情報を返す
 	public User findByLoginInfo(String loginId, String password) {
 		Connection conn = null;
 		try {
@@ -34,7 +34,7 @@ public class UserDao {
 				return null;
 			}
 
-			//取得した結果のIDとnameを有するインストラクタを返す
+			//取得した結果のログインIDとnameを有するインストラクタを返す
 			String loginIdData = rs.getString("login_id");
 			String nameData = rs.getString("name");
 			return new User(loginIdData, nameData);
@@ -66,6 +66,7 @@ public class UserDao {
 
 			//SELECT文を準備
 			String sql = "SELECT* FROM user WHERE id != 1";
+
 
 			//SELECT分を実行し結果を取得
 			Statement stmt = conn.createStatement();
@@ -292,51 +293,115 @@ public class UserDao {
 
 	//パスワードを含まないユーザ情報の更新
 	//パスワード含めたユーザの更新
-		public boolean updateNoPas(String name, String birthDate, String id) {
-			Connection conn = null;
+	public boolean updateNoPas(String name, String birthDate, String id) {
+		Connection conn = null;
 
-			try {
-				//データベースに接続
-				conn = DBManager.getConnection();
+		try {
+			//データベースに接続
+			conn = DBManager.getConnection();
 
-				//UPDATE文を用意
-				String sql = "UPDATE user SET name=?,birth_date=?, update_date=now()  WHERE id = ?";
+			//UPDATE文を用意
+			String sql = "UPDATE user SET name=?,birth_date=?, update_date=now()  WHERE id = ?";
 
-				//DELETE文を実行
-				PreparedStatement pStmt = conn.prepareStatement(sql);
-				pStmt.setString(1, name);
-				pStmt.setString(2, birthDate);
-				pStmt.setString(3, id);
+			//DELETE文を実行
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, name);
+			pStmt.setString(2, birthDate);
+			pStmt.setString(3, id);
 
-				//結果を取得
-				int result = pStmt.executeUpdate();
+			//結果を取得
+			int result = pStmt.executeUpdate();
 
-				//更新に成功した場合
-				if (result == 1) {
-					return true;
-				}
+			//更新に成功した場合
+			if (result == 1) {
+				return true;
+			}
 
-				//更新に失敗した場合
-				else {
+			//更新に失敗した場合
+			else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			//データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
 					return false;
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return false;
-			} finally {
-				//データベース切断
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-						return false;
-					}
-				}
+			}
 
+		}
+	}
+
+
+	//検索機能
+	public List<User> searchUser(String searchLoginId, String searchName, String birthDateMin, String birthDateMax) {
+		Connection conn = null;
+		List<User> userList = new ArrayList<User>();
+
+		try {
+			//データベースに接続
+			conn = DBManager.getConnection();
+
+			//SELECT文を準備
+			String sql = "SELECT* FROM user WHERE id != 1";
+
+			//ログインIDの入力があった場合
+			if(!searchLoginId.isEmpty()) {
+				sql += " AND login_id ='"+searchLoginId+"'";
+			}
+
+			//ユーザ名の入力があった場合
+			if(!searchName.isEmpty()) {
+				sql += " AND name LIKE'%"+searchName+"%'";
+			}
+
+			//最小生年月日の入力があった場合
+			if(!birthDateMin.isEmpty()) {
+				sql += " AND birth_date >= '"+birthDateMin+"'";
+			}
+
+			//最大生年月日の入力があった場合
+			if(!birthDateMax.isEmpty()) {
+				sql += " AND birth_date <= '"+birthDateMax+"'";
+			}
+
+			//SELECT分を実行し結果を取得
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+
+			//取得した情報をUserインスタンスに設定しArrayListインスタンスに追加
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String loginId = rs.getString("login_id");
+				String name = rs.getString("name");
+				Date birthDate = rs.getDate("birth_date");
+				String password = rs.getString("password");
+				String createDate = rs.getString("create_date");
+				String updateDate = rs.getString("update_date");
+				User user = new User(id, loginId, name, birthDate, password, createDate, updateDate);
+
+				userList.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			//データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
 			}
 		}
-
-		//idをもとにログインIDを取得
-
+		return userList;
+	}
 }

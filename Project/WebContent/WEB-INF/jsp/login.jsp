@@ -16,15 +16,16 @@
 
 	<div class="container center">
 
+
+
+		<h1 class="top">ログイン画面</h1>
 		<c:if test="${errMsg != null }">
 			<div>
 				<font color="red">${errMsg}</font>
 			</div>
 		</c:if>
-
-		<h1 class="top">ログイン画面</h1>
 		<form method="post" action="LoginServlet">
-			<div class="center content-margin">
+			<div class="center content-margin top">
 				<span>ログインID：</span> <input type="text" name="loginId" required>
 			</div>
 			<div class="center content-margin">
